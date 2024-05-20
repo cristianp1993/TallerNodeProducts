@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doument</title>
+  </head>
+  <body>
+    <div class="contenedor">
+      <div class="">
+        <h1>Registrar Producto</h1>
+        <form action="/submit" method="POST">
+          <label for="name">Nombre del Producto:</label>
+          <input type="text" id="name" name="product_name" required />
+          <br />
+          <label for="price">Precio:</label>
+          <input type="text" id="price" name="product_price" required />
+          <br />
+          <label for="stock">stock:</label>
+          <input type="number" id="stock" name="product_quantity" required />
+          <br />
+          <button type="submit">Registrar</button>
+        </form>
+      </div>
+      <div id="div-tabla">
+        <h1>Lista de Productos</h1>
+
+        <!-- Formulario de búsqueda por precio mínimo -->
+        <form action="/" method="GET">
+          <label for="minPrice">Precio mínimo:</label>
+          <input
+            type="text"
+            id="minPrice"
+            name="minPrice"
+            value="<%= minPrice || '' %>"
+            placeholder="Ej. 10"
+          />
+          <button id="searchForm" type="submit">Buscar</button>
+        </form>
+
+        <table id="productsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Precio Stock</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% products.forEach(product => { %>
+            <tr>
+              <td><%= product.id_product %></td>
+              <td><%= product.product_name %></td>
+              <td><%= product.product_price %></td>
+              <td><%= product.product_quantity %></td>
+              <td><%= product.product_price * product.product_quantity %></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+
+        <hr />
+      </div>
+    </div>
+  </body>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Arial", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #1e1e1e;
+      color: #333;
+    }
+
+    .contenedor {        
+      justify-content: space-around;
+      width: 140vh;
+      display: flex;
+      padding: 20px;
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    button {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    button:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    hr {
+      margin: 20px 0;
+      border: 0;
+      height: 1px;
+      background: #ccc;
+    }
+  </style>
+</html>
